@@ -1,0 +1,52 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="card">
+        <div class="card-body text-center">
+          <span class="title">PRODUCT LIST</span>
+          <table class="table table-striped mt-3">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Category</th>
+                <th scope="col">Location</th>
+                <th scope="col">Price</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              @for(product of productList; track product._id){
+              <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.location }}</td>
+                <td>{{ product.price | currency : "GBP" : "symbol" }}</td>
+                <td>
+                  <i
+                    class="fa-solid fa-pen-to-square text-primary"
+                    [routerLink]="['/modify-product', product._id]"
+                  ></i>
+                  <i
+                    class="fa-solid fa-trash text-danger"
+                    (click)="deleteProduct(product._id)"
+                  ></i>
+                </td>
+              </tr>
+              } @empty{
+              <tr>
+                <td colspan="5">There are no products available</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+          <button
+            class="btn btn-success float-end"
+            routerLink="/create-product"
+          >
+            NEW
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
